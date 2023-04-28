@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{323C76A8-36F7-42B8-8858-878F12BD9726}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stargazer.Abp.Authentication.JwtBearer.Application", "src\Stargazer.Abp.Authentication.JwtBearer.Application\Stargazer.Abp.Authentication.JwtBearer.Application.csproj", "{54DA6496-113F-4F19-BF9F-13658F13D9CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stargazer.Abp.Authentication.JwtBearer.Application.Contracts", "src\Stargazer.Abp.Authentication.JwtBearer.Application.Contracts\Stargazer.Abp.Authentication.JwtBearer.Application.Contracts.csproj", "{3B6084E5-304E-48EE-986E-20D72E0E5022}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stargazer.Abp.Authentication.JwtBearer.HttpApi", "src\Stargazer.Abp.Authentication.JwtBearer.HttpApi\Stargazer.Abp.Authentication.JwtBearer.HttpApi.csproj", "{CBE361B8-66C7-49EF-9C57-2B10DE3543D4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{54DA6496-113F-4F19-BF9F-13658F13D9CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54DA6496-113F-4F19-BF9F-13658F13D9CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54DA6496-113F-4F19-BF9F-13658F13D9CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54DA6496-113F-4F19-BF9F-13658F13D9CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B6084E5-304E-48EE-986E-20D72E0E5022}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B6084E5-304E-48EE-986E-20D72E0E5022}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B6084E5-304E-48EE-986E-20D72E0E5022}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B6084E5-304E-48EE-986E-20D72E0E5022}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBE361B8-66C7-49EF-9C57-2B10DE3543D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBE361B8-66C7-49EF-9C57-2B10DE3543D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBE361B8-66C7-49EF-9C57-2B10DE3543D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBE361B8-66C7-49EF-9C57-2B10DE3543D4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{54DA6496-113F-4F19-BF9F-13658F13D9CE} = {323C76A8-36F7-42B8-8858-878F12BD9726}
+		{3B6084E5-304E-48EE-986E-20D72E0E5022} = {323C76A8-36F7-42B8-8858-878F12BD9726}
+		{CBE361B8-66C7-49EF-9C57-2B10DE3543D4} = {323C76A8-36F7-42B8-8858-878F12BD9726}
+	EndGlobalSection
+EndGlobal

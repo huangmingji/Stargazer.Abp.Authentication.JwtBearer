@@ -23,7 +23,10 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
-      
+
+    - name: Add nuget source
+      run: dotnet nuget add source --username ${{ secrets.GIT_USER_NAME }} --password ${{ secrets.GIT_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/huangmingji/index.json"
+    
     - name: Pack Stargazer.Abp.Authentication.JwtBearer.Application.Contracts
       run: dotnet pack ./src/Stargazer.Abp.Authentication.JwtBearer.Application.Contracts -c Release -p:PackageVersion=${{ github.ref_name }}
     - name: Pack Stargazer.Abp.Authentication.JwtBearer.Application
@@ -31,12 +34,21 @@ jobs:
     - name: Pack Stargazer.Abp.Authentication.JwtBearer.HttpApi
       run: dotnet pack ./src/Stargazer.Abp.Authentication.JwtBearer.HttpApi -c Release -p:PackageVersion=${{ github.ref_name }}
       
-    - name: Push Stargazer.Abp.Authentication.JwtBearer.Application.Contracts
+    - name: Push Stargazer.Abp.Authentication.JwtBearer.Application.Contracts to nuget
       run: dotnet nuget push ./src/Stargazer.Abp.Authentication.JwtBearer.Application.Contracts/bin/Release/Stargazer.Abp.Authentication.JwtBearer.Application.Contracts.*.nupkg --skip-duplicate -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
       
-    - name: Push Stargazer.Abp.Authentication.JwtBearer.Application
+    - name: Push Stargazer.Abp.Authentication.JwtBearer.Application.Contracts to github
+      run: dotnet nuget push ./src/Stargazer.Abp.Authentication.JwtBearer.Application.Contracts/bin/Release/Stargazer.Abp.Authentication.JwtBearer.Application.Contracts.*.nupkg --skip-duplicate -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }} --source "github"
+      
+    - name: Push Stargazer.Abp.Authentication.JwtBearer.Application to nuget
       run: dotnet nuget push ./src/Stargazer.Abp.Authentication.JwtBearer.Application/bin/Release/Stargazer.Abp.Authentication.JwtBearer.Application.*.nupkg --skip-duplicate -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
       
-    - name: Push Stargazer.Abp.Authentication.JwtBearer.HttpApi
+    - name: Push Stargazer.Abp.Authentication.JwtBearer.Application to github
+      run: dotnet nuget push ./src/Stargazer.Abp.Authentication.JwtBearer.Application/bin/Release/Stargazer.Abp.Authentication.JwtBearer.Application.*.nupkg --skip-duplicate -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }} --source "github"
+      
+    - name: Push Stargazer.Abp.Authentication.JwtBearer.HttpApi to nuget
       run: dotnet nuget push ./src/Stargazer.Abp.Authentication.JwtBearer.HttpApi/bin/Release/Stargazer.Abp.Authentication.JwtBearer.HttpApi.*.nupkg --skip-duplicate -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
+  
+    - name: Push Stargazer.Abp.Authentication.JwtBearer.HttpApi to github
+      run: dotnet nuget push ./src/Stargazer.Abp.Authentication.JwtBearer.HttpApi/bin/Release/Stargazer.Abp.Authentication.JwtBearer.HttpApi.*.nupkg --skip-duplicate -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }} --source "github"
   

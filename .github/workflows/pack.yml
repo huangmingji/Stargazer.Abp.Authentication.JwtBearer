@@ -24,11 +24,11 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Pack Stargazer.Abp.Authentication.JwtBearer.Application.Contracts
-      run: dotnet pack ./src/Stargazer.Abp.Authentication.JwtBearer.Application.Contracts -c Release -p:PackageVersion=${{ github.event.release.tag_name }}
+      run: dotnet pack ./src/Stargazer.Abp.Authentication.JwtBearer.Application.Contracts -c Release -p:PackageVersion=${{ github.ref }}
     - name: Pack Stargazer.Abp.Authentication.JwtBearer.Application
-      run: dotnet pack ./src/Stargazer.Abp.Authentication.JwtBearer.Application -c Release -p:PackageVersion=${{ github.event.release.tag_name }}
+      run: dotnet pack ./src/Stargazer.Abp.Authentication.JwtBearer.Application -c Release -p:PackageVersion=${{ github.ref }}
     - name: Pack Stargazer.Abp.Authentication.JwtBearer.Application.HttpApi
-      run: dotnet pack ./src/Stargazer.Abp.Authentication.JwtBearer.Application.HttpApi -c Release -p:PackageVersion=${{ github.event.release.tag_name }}
+      run: dotnet pack ./src/Stargazer.Abp.Authentication.JwtBearer.Application.HttpApi -c Release -p:PackageVersion=${{ github.ref }}
       
     - name: Publish Stargazer.Abp.Authentication.JwtBearer.Application.Contracts
       run: dotnet nuget push ./src/Stargazer.Abp.Authentication.JwtBearer.Application.Contracts/bin/Release/Stargazer.Abp.Authentication.JwtBearer.Application.Contracts.*.nupkg --skip-duplicate -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}

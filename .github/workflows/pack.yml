@@ -27,8 +27,8 @@ jobs:
       run: dotnet pack ./src/Stargazer.Abp.Authentication.JwtBearer.Application.Contracts -c Release -p:PackageVersion=${{ github.ref_name }}
     - name: Pack Stargazer.Abp.Authentication.JwtBearer.Application
       run: dotnet pack ./src/Stargazer.Abp.Authentication.JwtBearer.Application -c Release -p:PackageVersion=${{ github.ref_name }}
-    - name: Pack Stargazer.Abp.Authentication.JwtBearer.Application.HttpApi
-      run: dotnet pack ./src/Stargazer.Abp.Authentication.JwtBearer.Application.HttpApi -c Release -p:PackageVersion=${{ github.ref_name }}
+    - name: Pack Stargazer.Abp.Authentication.JwtBearer.HttpApi
+      run: dotnet pack ./src/Stargazer.Abp.Authentication.JwtBearer.HttpApi -c Release -p:PackageVersion=${{ github.ref_name }}
       
     - name: Publish Stargazer.Abp.Authentication.JwtBearer.Application.Contracts
       run: dotnet nuget push ./src/Stargazer.Abp.Authentication.JwtBearer.Application.Contracts/bin/Release/Stargazer.Abp.Authentication.JwtBearer.Application.Contracts.*.nupkg --skip-duplicate -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
@@ -36,6 +36,6 @@ jobs:
     - name: Publish Stargazer.Abp.Authentication.JwtBearer.Application
       run: dotnet nuget push ./src/Stargazer.Abp.Authentication.JwtBearer.Application/bin/Release/Stargazer.Abp.Authentication.JwtBearer.Application.*.nupkg --skip-duplicate -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
       
-    - name: Publish Stargazer.Abp.Authentication.JwtBearer.Application.HttpApi
-      run: dotnet nuget push ./src/Stargazer.Abp.Authentication.JwtBearer.Application.HttpApi/bin/Release/Stargazer.Abp.Authentication.JwtBearer.Application.HttpApi.*.nupkg --skip-duplicate -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
+    - name: Publish Stargazer.Abp.Authentication.JwtBearer.HttpApi
+      run: dotnet nuget push ./src/Stargazer.Abp.Authentication.JwtBearer.HttpApi/bin/Release/Stargazer.Abp.Authentication.JwtBearer.HttpApi.*.nupkg --skip-duplicate -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
   

@@ -24,9 +24,6 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
 
-    - name: Add nuget source
-      run: dotnet nuget add source --username ${{ secrets.GIT_USER_NAME }} --password ${{ secrets.GIT_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/huangmingji/index.json"
-    
     - name: Pack Stargazer.Abp.Authentication.JwtBearer.Application.Contracts
       run: dotnet pack ./src/Stargazer.Abp.Authentication.JwtBearer.Application.Contracts -c Release -p:PackageVersion=${{ github.ref_name }}
     - name: Pack Stargazer.Abp.Authentication.JwtBearer.Application

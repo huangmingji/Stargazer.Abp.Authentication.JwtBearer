@@ -6,6 +6,9 @@ namespace Stargazer.Abp.Authentication.JwtBearer.Application.Contracts.Authentic
 
         public string AccessToken { get; set; } = "";
 
+        public DateTime RefreshTime { get; set; }
+
         public DateTime ExpiresTime { get; set; }
+
     }
 }

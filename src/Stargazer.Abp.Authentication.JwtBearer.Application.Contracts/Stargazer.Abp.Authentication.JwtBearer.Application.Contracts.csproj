@@ -1,9 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
+        <OutputType>Exe</OutputType>
         <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <PackageId>Stargazer.Abp.Authentication.JwtBearer.Application.Contracts</PackageId>
+        <Authors>huangmingji</Authors>
+        <Company>Stargazer</Company>
+        <PackageDescription>一个基于ABP的Jwt授权认证模块</PackageDescription>
+        <RepositoryUrl>https://github.com/huangmingji/Stargazer.Abp.Authentication.JwtBearer</RepositoryUrl>
     </PropertyGroup>
 
     <ItemGroup>

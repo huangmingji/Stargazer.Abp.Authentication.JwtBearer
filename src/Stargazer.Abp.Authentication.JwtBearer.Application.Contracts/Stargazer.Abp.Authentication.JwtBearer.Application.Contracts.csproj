@@ -12,9 +12,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.1" />
-        <PackageReference Include="Stargazer.Abp.Account.Application.Contracts" Version="7.0.1.9-pre" />
-        <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" Version="7.0.1" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.5" />
+        <PackageReference Include="Stargazer.Abp.Account.Application.Contracts" Version="7.2.1.1-alpha" />
+        <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" Version="7.2.1" />
     </ItemGroup>
 
 </Project>

@@ -18,10 +18,10 @@ namespace Stargazer.Abp.Authentication.JwtBearer.HttpApi
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
-            IConfiguration configuration = context.Services.GetRequiredService<IConfiguration>();
-            string strongPassPhrase = configuration.GetSection("App:AbpSecurity:PassPhrase").Value ?? "LxMH1v8lyuVsOF3B";
-            string salt = configuration.GetSection("App:AbpSecurity:Salt").Value ?? "p%TCDNuW";
-            string initVectorBytes = configuration.GetSection("App:AbpSecurity:InitVectorBytes").Value ?? "5uhQorj0IO7eMTBR";
+            IConfiguration? configuration = context.Services.BuildServiceProvider().GetService<IConfiguration>();
+            string strongPassPhrase = configuration?.GetSection("App:AbpSecurity:PassPhrase").Value ?? "LxMH1v8lyuVsOF3B";
+            string salt = configuration?.GetSection("App:AbpSecurity:Salt").Value ?? "p%TCDNuW";
+            string initVectorBytes = configuration?.GetSection("App:AbpSecurity:InitVectorBytes").Value ?? "5uhQorj0IO7eMTBR";
             Configure<AbpStringEncryptionOptions>(opts =>
             {
                 opts.DefaultPassPhrase = strongPassPhrase;

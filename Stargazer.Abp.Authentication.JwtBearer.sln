@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stargazer.Abp.Authenticatio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stargazer.Abp.Authentication.JwtBearer.HttpApi", "src\Stargazer.Abp.Authentication.JwtBearer.HttpApi\Stargazer.Abp.Authentication.JwtBearer.HttpApi.csproj", "{CBE361B8-66C7-49EF-9C57-2B10DE3543D4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stargazer.Abp.Authentication.JwtBearer.Host", "src\Stargazer.Abp.Authentication.JwtBearer.Host\Stargazer.Abp.Authentication.JwtBearer.Host.csproj", "{451AAABB-0387-4F2C-ABA5-D14474349F29}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,10 +34,15 @@ Global
 		{CBE361B8-66C7-49EF-9C57-2B10DE3543D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBE361B8-66C7-49EF-9C57-2B10DE3543D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBE361B8-66C7-49EF-9C57-2B10DE3543D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{451AAABB-0387-4F2C-ABA5-D14474349F29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{451AAABB-0387-4F2C-ABA5-D14474349F29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{451AAABB-0387-4F2C-ABA5-D14474349F29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{451AAABB-0387-4F2C-ABA5-D14474349F29}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{54DA6496-113F-4F19-BF9F-13658F13D9CE} = {323C76A8-36F7-42B8-8858-878F12BD9726}
 		{3B6084E5-304E-48EE-986E-20D72E0E5022} = {323C76A8-36F7-42B8-8858-878F12BD9726}
 		{CBE361B8-66C7-49EF-9C57-2B10DE3543D4} = {323C76A8-36F7-42B8-8858-878F12BD9726}
+		{451AAABB-0387-4F2C-ABA5-D14474349F29} = {323C76A8-36F7-42B8-8858-878F12BD9726}
 	EndGlobalSection
 EndGlobal

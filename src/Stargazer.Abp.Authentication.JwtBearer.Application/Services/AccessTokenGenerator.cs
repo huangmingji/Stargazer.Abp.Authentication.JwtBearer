@@ -73,16 +73,10 @@ public class AccessTokenGenerator : ITransientDependency, IAccessTokenGenerator
             claims.Add(new Claim("permission", permission));
         }
 
-        return GenerateToken(securityKey, audience, issuer, claims, expires);
+        return GenerateToken(claims, expires);
     }
 
     public string GenerateToken(List<Claim> claims, DateTime expires)
-    {
-        return GenerateToken(securityKey, audience, issuer, claims, expires);
-    }
-
-    public string GenerateToken(string securityKey, string issuer, string audience, List<Claim> claims,
-        DateTime expires)
     {
         var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(securityKey));
 
@@ -100,6 +94,6 @@ public class AccessTokenGenerator : ITransientDependency, IAccessTokenGenerator
     {
         List<Claim> claims = new List<Claim>();
         claims.Add(new Claim(AbpClaimTypes.UserId, userId));
-        return GenerateToken(securityKey, audience, issuer, claims, expires);
+        return GenerateToken(claims, expires);
     }
 }

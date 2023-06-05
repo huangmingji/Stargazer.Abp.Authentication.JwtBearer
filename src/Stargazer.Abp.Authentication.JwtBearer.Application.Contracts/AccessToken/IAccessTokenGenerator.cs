@@ -11,7 +11,5 @@ public interface IAccessTokenGenerator
     
     string GenerateToken(string userId, DateTime expires);
 
-    string GenerateToken(List<Claim> claims, DateTime expires);
-        
-    string GenerateToken(string securityKey, string issuer, string audience, List<Claim> claims, DateTime expires);
+    string GenerateToken(List<Claim> claims, DateTime expires);        
 }

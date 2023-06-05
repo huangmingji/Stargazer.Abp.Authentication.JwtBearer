@@ -19,9 +19,9 @@ public class AccessTokenGenerator : ITransientDependency, IAccessTokenGenerator
         _configuration = configuration;
     }
 
-    private string securityKey { get { return _configuration?.GetSection("JwtBearer:SecurityKey").Value ?? "123456"; } }
-    private string issuer { get { return _configuration?.GetSection("JwtBearer:Issuer").Value ?? "123456"; } }
-    private string audience { get { return _configuration?.GetSection("JwtBearer:Audience").Value ?? "123456"; } }
+    private string securityKey { get { return _configuration?.GetSection("JwtBearer:SecurityKey").Value ?? "XFEhcc3eNjP9kJrTaokYCQOpQ4SiABBML6QjNKr7EUyiUGGi0Id7uq4LKDLW9Nss"; } }
+    private string issuer { get { return _configuration?.GetSection("JwtBearer:Issuer").Value ?? "sfsdfadf"; } }
+    private string audience { get { return _configuration?.GetSection("JwtBearer:Audience").Value ?? "sdfasdfad"; } }
 
     public TokenValidationResult ValidateToken(string token)
     {
@@ -29,8 +29,8 @@ public class AccessTokenGenerator : ITransientDependency, IAccessTokenGenerator
         {
             ValidIssuer = issuer,
             ValidAudience = audience,
-            ValidateIssuer = true,
-            ValidateAudience = true,
+            ValidateIssuer = false,
+            ValidateAudience = false,
             ValidateIssuerSigningKey = true,
             ValidateLifetime = true,
             RequireExpirationTime = true,
@@ -38,17 +38,24 @@ public class AccessTokenGenerator : ITransientDependency, IAccessTokenGenerator
             IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(securityKey))
         };
 
-        var tokenValidationResult = new JsonWebTokenHandler().ValidateToken(token, tokenValidationParameters);
-        if (!tokenValidationResult.IsValid)
+        try
         {
-            // Handle each exception which tokenValidationResult can contain as appropriate for your service
-            // Your service might need to respond with a http response instead of an exception.
-            if (tokenValidationResult.Exception != null)
-                throw tokenValidationResult.Exception;
+            var tokenValidationResult = new JsonWebTokenHandler().ValidateToken(token, tokenValidationParameters);
+            if (!tokenValidationResult.IsValid)
+            {
+                // Handle each exception which tokenValidationResult can contain as appropriate for your service
+                // Your service might need to respond with a http response instead of an exception.
+                if (tokenValidationResult.Exception != null)
+                    throw tokenValidationResult.Exception;
 
+                throw new AbpAuthorizationException();
+            }
+            return tokenValidationResult;
+        }
+        catch (SecurityTokenExpiredException ex)
+        {
             throw new AbpAuthorizationException();
         }
-        return tokenValidationResult;
     }
 
     public string GenerateToken(string userId, Guid? tenantId, List<string> permissions, DateTime expires)
@@ -66,16 +73,10 @@ public class AccessTokenGenerator : ITransientDependency, IAccessTokenGenerator
             claims.Add(new Claim("permission", permission));
         }
 
-        return GenerateToken(securityKey, audience, issuer, claims, expires);
+        return GenerateToken(claims, expires);
     }
 
     public string GenerateToken(List<Claim> claims, DateTime expires)
-    {
-        return GenerateToken(securityKey, audience, issuer, claims, expires);
-    }
-
-    public string GenerateToken(string securityKey, string issuer, string audience, List<Claim> claims,
-        DateTime expires)
     {
         var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(securityKey));
 
@@ -93,6 +94,6 @@ public class AccessTokenGenerator : ITransientDependency, IAccessTokenGenerator
     {
         List<Claim> claims = new List<Claim>();
         claims.Add(new Claim(AbpClaimTypes.UserId, userId));
-        return GenerateToken(securityKey, audience, issuer, claims, expires);
+        return GenerateToken(claims, expires);
     }
 }

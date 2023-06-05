@@ -6,6 +6,7 @@ using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Modularity;
 using Volo.Abp.Security;
 using Volo.Abp.Security.Encryption;
+using Lemon.Common.Extend;
 
 namespace Stargazer.Abp.Authentication.JwtBearer.HttpApi
 {
@@ -18,16 +19,17 @@ namespace Stargazer.Abp.Authentication.JwtBearer.HttpApi
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
-            IConfiguration configuration = context.Services.GetRequiredService<IConfiguration>();
-            string strongPassPhrase = configuration.GetSection("App:AbpSecurity:PassPhrase").Value ?? "LxMH1v8lyuVsOF3B";
-            string salt = configuration.GetSection("App:AbpSecurity:Salt").Value ?? "p%TCDNuW";
-            string initVectorBytes = configuration.GetSection("App:AbpSecurity:InitVectorBytes").Value ?? "5uhQorj0IO7eMTBR";
+            IConfiguration? configuration = context.Services.BuildServiceProvider().GetService<IConfiguration>();
+            string strongPassPhrase = configuration?.GetSection("App:AbpSecurity:PassPhrase").Value ?? "LxMH1v8lyuVsOF3B";
+            string salt = configuration?.GetSection("App:AbpSecurity:Salt").Value ?? "p%TCDNuW";
+            string initVectorBytes = configuration?.GetSection("App:AbpSecurity:InitVectorBytes").Value ?? "5uhQorj0IO7eMTBR";
+            int keySize = configuration?.GetSection("App:AbpSecurity:KeySize").Value.ToInt() ?? 256;
             Configure<AbpStringEncryptionOptions>(opts =>
             {
                 opts.DefaultPassPhrase = strongPassPhrase;
                 opts.DefaultSalt = Encoding.UTF8.GetBytes(salt);
                 opts.InitVectorBytes = Encoding.UTF8.GetBytes(initVectorBytes);
-                opts.Keysize = 512;
+                opts.Keysize = keySize;
             });
         }
     }

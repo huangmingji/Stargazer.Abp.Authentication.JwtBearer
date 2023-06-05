@@ -10,25 +10,27 @@ using Volo.Abp.Security.Claims;
 using Volo.Abp.Authorization;
 using Lemon.Common.Extend;
 
-namespace Stargazer.Abp.Authentication.JwtBearer.HttpApi.Controllers;
+namespace Stargazer.Abp.Authentication.JwtBearer.Host.Controllers;
 
 [ApiController]
-[Produces("application/json")]
-[Route("api/account")]
-public class AccountController : AbpController
+[Route("[controller]")]
+public class TestController : AbpController
 {
+
     private readonly IConfiguration _configuration;
-    private readonly IUserService _userService;
     private readonly IAccessTokenGenerator _accessTokenGenerator;
     private readonly IStringEncryptionService _stringEncryptionService;
-    public AccountController(IConfiguration configuration, IUserService userService,
+    private readonly ILogger<TestController> _logger;
+
+    public TestController(IConfiguration configuration,
         IAccessTokenGenerator accessTokenGenerator,
-        IStringEncryptionService stringEncryptionService)
+        IStringEncryptionService stringEncryptionService,
+        ILogger<TestController> logger)
     {
         _configuration = configuration;
-        _userService = userService;
         _accessTokenGenerator = accessTokenGenerator;
         _stringEncryptionService = stringEncryptionService;
+        _logger = logger;
     }
 
     private double RefreshTime { get { return _configuration.GetSection("JwtBearer:RefreshTime").Value.ToDoubleOrNull() ?? 1800; } }
@@ -37,17 +39,17 @@ public class AccountController : AbpController
     [HttpPost("login")]
     public async Task<LoginResponseDto> LoginAsync([FromBody] VerifyPasswordDto input)
     {
-        var user = await _userService.VerifyPasswordAsync(input);
+        string userId = Guid.NewGuid().ToString();
         var expiresTime = DateTime.Now.AddSeconds(ExpiresTime);
         var refreshToken = _accessTokenGenerator.GenerateToken(
-            user.Id.ToString(),
+            userId,
             expiresTime
         );
         var refreshTime = DateTime.Now.AddSeconds(RefreshTime);
         var accessToken = _accessTokenGenerator.GenerateToken(
-            user.Id.ToString(),
-            user.UserRoles.FirstOrDefault()?.TenantId,
-            user.GetPermissions(),
+            userId,
+            null,
+            new List<string>(),
             refreshTime
         );
 
@@ -64,25 +66,27 @@ public class AccountController : AbpController
     public async Task<LoginResponseDto> RefreshTokenAsync([FromBody] RefreshTokenDto input)
     {
         var refreshToken = _stringEncryptionService.Decrypt(input.RefreshToken);
+
+        _logger.LogInformation(refreshToken);
+
         var tokenValidationResult = _accessTokenGenerator.ValidateToken(refreshToken);
         var userIdStr = tokenValidationResult.Claims.GetOrDefault(AbpClaimTypes.UserId).ToString();
         if (!Guid.TryParse(userIdStr, out Guid userId))
         {
             throw new AbpAuthorizationException();
         }
-        var user = await _userService.GetAsync(userId);
 
         var expiresTime = DateTime.Now.AddSeconds(ExpiresTime);
         refreshToken = _accessTokenGenerator.GenerateToken(
-            user.Id.ToString(),
+            userIdStr,
             expiresTime
         );
 
         var refreshTime = DateTime.Now.AddSeconds(RefreshTime);
         var accessToken = _accessTokenGenerator.GenerateToken(
-            user.Id.ToString(),
-            user.UserRoles.FirstOrDefault()?.TenantId,
-            user.GetPermissions(),
+            userIdStr,
+            null,
+            new List<string>(),
             refreshTime
         );
 

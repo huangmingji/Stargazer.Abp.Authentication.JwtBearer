@@ -3,7 +3,5 @@ namespace Stargazer.Abp.Authentication.JwtBearer.Application.Contracts.Authentic
     public class RefreshTokenDto
     {
         public string RefreshToken { get; set; } = "";
-
-        public string Token { get; set; } = "";
     }
 }

@@ -34,7 +34,7 @@ public class AccountController : AbpController
     private double RefreshTime { get { return _configuration.GetSection("JwtBearer:RefreshTime").Value.ToDoubleOrNull() ?? 1800; } }
     private double ExpiresTime { get { return _configuration.GetSection("JwtBearer:ExpiresTime").Value.ToDoubleOrNull() ?? 300; } }
 
-    public long DateTimeToUnixTimestampMillis(DateTime dateTime)
+    private long DateTimeToUnixTimestampMillis(DateTime dateTime)
     {
         DateTime epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
         TimeSpan timeSpan = dateTime.ToUniversalTime() - epoch;

@@ -34,29 +34,35 @@ public class AccountController : AbpController
     private double RefreshTime { get { return _configuration.GetSection("JwtBearer:RefreshTime").Value.ToDoubleOrNull() ?? 1800; } }
     private double ExpiresTime { get { return _configuration.GetSection("JwtBearer:ExpiresTime").Value.ToDoubleOrNull() ?? 300; } }
 
+    public long DateTimeToUnixTimestampMillis(DateTime dateTime)
+    {
+        DateTime epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        TimeSpan timeSpan = dateTime.ToUniversalTime() - epoch;
+        return (long)timeSpan.TotalMilliseconds;
+    }
+
     [HttpPost("login")]
     public async Task<LoginResponseDto> LoginAsync([FromBody] VerifyPasswordDto input)
     {
         var user = await _userService.VerifyPasswordAsync(input);
-        var expiresTime = DateTime.Now.AddSeconds(ExpiresTime);
+        var refreshTime = DateTime.Now.AddSeconds(RefreshTime);
         var refreshToken = _accessTokenGenerator.GenerateToken(
             user.Id.ToString(),
-            expiresTime
+            refreshTime
         );
-        var refreshTime = DateTime.Now.AddSeconds(RefreshTime);
+        var expiresTime = DateTime.Now.AddSeconds(ExpiresTime);
         var accessToken = _accessTokenGenerator.GenerateToken(
             user.Id.ToString(),
             user.UserRoles.FirstOrDefault()?.TenantId,
             user.GetPermissions(),
-            refreshTime
+            expiresTime
         );
 
         return new LoginResponseDto()
         {
             RefreshToken = _stringEncryptionService.Encrypt(refreshToken),
             AccessToken = accessToken,
-            RefreshTime = refreshTime,
-            ExpiresTime = expiresTime
+            ExpiresTime = DateTimeToUnixTimestampMillis(expiresTime)
         };
     }
 
@@ -72,26 +78,25 @@ public class AccountController : AbpController
         }
         var user = await _userService.GetAsync(userId);
 
-        var expiresTime = DateTime.Now.AddSeconds(ExpiresTime);
+        var refreshTime = DateTime.Now.AddSeconds(RefreshTime);
         refreshToken = _accessTokenGenerator.GenerateToken(
             user.Id.ToString(),
-            expiresTime
+            refreshTime
         );
 
-        var refreshTime = DateTime.Now.AddSeconds(RefreshTime);
+        var expiresTime = DateTime.Now.AddSeconds(ExpiresTime);
         var accessToken = _accessTokenGenerator.GenerateToken(
             user.Id.ToString(),
             user.UserRoles.FirstOrDefault()?.TenantId,
             user.GetPermissions(),
-            refreshTime
+            expiresTime
         );
 
         return new LoginResponseDto()
         {
             RefreshToken = _stringEncryptionService.Encrypt(refreshToken),
             AccessToken = accessToken,
-            RefreshTime = refreshTime,
-            ExpiresTime = expiresTime
+            ExpiresTime = DateTimeToUnixTimestampMillis(expiresTime)
         };
     }
 }

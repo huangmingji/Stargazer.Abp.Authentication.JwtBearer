@@ -1,5 +1,5 @@
 using System.Text;
-using Lemon.Common.Extend;
+using Stargazer.Common.Extend;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Stargazer.Abp.Authentication.JwtBearer.Application.Contracts;

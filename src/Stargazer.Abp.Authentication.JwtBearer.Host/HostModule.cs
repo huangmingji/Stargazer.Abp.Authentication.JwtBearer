@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 using System.Reflection;
-using Lemon.Common.Extend;
+using Stargazer.Common.Extend;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.Caching.StackExchangeRedis;

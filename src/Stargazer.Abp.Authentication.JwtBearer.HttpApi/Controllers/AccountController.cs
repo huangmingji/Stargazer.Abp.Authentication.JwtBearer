@@ -8,7 +8,7 @@ using Stargazer.Abp.Authentication.JwtBearer.Application.Contracts.AccessToken;
 using Volo.Abp.Security.Encryption;
 using Volo.Abp.Security.Claims;
 using Volo.Abp.Authorization;
-using Lemon.Common.Extend;
+using Stargazer.Common.Extend;
 
 namespace Stargazer.Abp.Authentication.JwtBearer.HttpApi.Controllers;
 

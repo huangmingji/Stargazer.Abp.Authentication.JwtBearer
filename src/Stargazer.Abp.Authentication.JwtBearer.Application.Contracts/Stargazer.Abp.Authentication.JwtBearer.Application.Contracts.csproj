@@ -15,7 +15,7 @@
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.8" />
         <PackageReference Include="Stargazer.Abp.Account.Application.Contracts" Version="8.3.1.1-alpha" />
         <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" Version="8.3.1" />
-        <PackageReference Include="Lemon.Common" Version="1.2.2" />
+        <PackageReference Include="Lemon.Common" Version="8.0.1" />
     </ItemGroup>
 
 </Project>

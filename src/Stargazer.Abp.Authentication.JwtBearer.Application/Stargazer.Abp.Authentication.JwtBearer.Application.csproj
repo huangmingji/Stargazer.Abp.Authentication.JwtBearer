@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackageId>Stargazer.Abp.Authentication.JwtBearer.Application</PackageId>
@@ -13,7 +13,7 @@
 
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Ddd.Application" Version="8.3.1" />
+    <PackageReference Include="Volo.Abp.Ddd.Application" Version="9.0.2" />
   </ItemGroup>
 
 

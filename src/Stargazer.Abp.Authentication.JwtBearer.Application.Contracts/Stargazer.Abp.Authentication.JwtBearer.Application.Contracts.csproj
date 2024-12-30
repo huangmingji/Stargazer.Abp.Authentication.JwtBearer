@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <PackageId>Stargazer.Abp.Authentication.JwtBearer.Application.Contracts</PackageId>
@@ -12,10 +12,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.8" />
-        <PackageReference Include="Stargazer.Abp.Account.Application.Contracts" Version="8.3.1.1-alpha" />
-        <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" Version="8.3.1" />
-        <PackageReference Include="Stargazer.Common" Version="8.0.1.2" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.0" />
+        <PackageReference Include="Stargazer.Abp.Account.Application.Contracts" Version="9.0.2.3-alpha" />
+        <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" Version="9.0.2" />
+        <PackageReference Include="Stargazer.Common" Version="9.0.0" />
     </ItemGroup>
 
 </Project>
